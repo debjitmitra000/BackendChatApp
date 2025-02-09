@@ -33,11 +33,27 @@ cloudinary.config({
 });
 
 const app = express();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
 app.use(cors(corsOptions));
 
 const server = createServer(app);
 const io = new Server(server, {
-  cors: corsOptions,
+  cors: {
+    ...corsOptions,
+    transports: ['websocket', 'polling']
+  },
+  pingTimeout: 60000,
+  cookie: {
+    name: "io",
+    path: "/",
+    httpOnly: true,
+    sameSite: "none",
+    secure: true
+  }
 });
 app.set("io", io);
 const userSocketIDs = new Map();
@@ -52,7 +68,12 @@ app.use("/api/v1/chat", chatRoute);
 
 io.use((socket, next) => {
   cookieParser()(socket.request, socket.request.res, async (err) => {
-    await socketAuthenticator(err, socket, next);
+    try {
+      await socketAuthenticator(err, socket, next);
+    } catch (error) {
+      console.error("Socket authentication error:", error);
+      next(new Error("Authentication error"));
+    }
   });
 });
 
