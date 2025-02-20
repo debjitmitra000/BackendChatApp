@@ -42,18 +42,9 @@ app.use(cors(corsOptions));
 
 const server = createServer(app);
 const io = new Server(server, {
-  cors: {
-    ...corsOptions,
-    transports: ['websocket', 'polling']
-  },
-  pingTimeout: 60000,
-  cookie: {
-    name: "io",
-    path: "/",
-    httpOnly: true,
-    sameSite: "none",
-    secure: true
-  }
+  cors: corsOptions,
+  transports: ['polling', 'websocket'],
+  withCredentials: true,  
 });
 app.set("io", io);
 const userSocketIDs = new Map();
@@ -142,7 +133,7 @@ io.on("connection", (socket) => {
 
 app.use(errorMiddlewares);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 server.listen(port, () => {
   console.log(`Server running at port ${port}`);
 });
