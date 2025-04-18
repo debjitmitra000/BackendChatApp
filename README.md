@@ -87,13 +87,10 @@
 ```bash
 # 1. Clone the repository
 git clone https://github.com/debjitmitra000/BackendChatApp.git
-
 # 2. Navigate to the project directory
 cd BackendChatApp
-
 # 3. Install dependencies
 npm install
-
 # 4. Create .env file with the following:
 MONGO_URI=your_mongodb_connection_string
 PORT=8000
@@ -102,10 +99,8 @@ CLIENT_SERVER=http://localhost:5174
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-
 # 5. Start the development server
 npm run dev
-
 # 6. Start in production mode
 npm start
 ```
