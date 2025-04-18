@@ -12,7 +12,7 @@
 
 <div align="center">
   <a href="https://github.com/debjitmitra000/FrontendChatApp">
-    <img src="https://img.shields.io/badge/💻_Frontend_Repository-171515?style=for-the-badge&logo=react&logoColor=61DAFB" alt="Frontend Repo"/>
+    <img src="https://img.shields.io/badge/💻_Visit_Frontend_Repository-171515?style=for-the-badge&logo=react&logoColor=61DAFB" alt="Frontend Repo"/>
   </a>
 </div>
 
